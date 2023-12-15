@@ -4,6 +4,16 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class PublishedManager(models.Manager):
+    """
+    Модельный менеджер для обращения к модели
+    """
+    def get_queryset(self):
+        """
+        Возвращает набор запросов QuerySet, посты со статусом Published
+        :return:
+        """
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 class Post(models.Model):
     """
     Таблица записи
@@ -26,6 +36,10 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
+
+    #Менеджер
+    objects = models.Manager() #Менеджер по умолчанию
+    published = PublishedManager() #Новосозданный менеджер
 
     class Meta:
         """
