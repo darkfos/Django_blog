@@ -19,6 +19,8 @@ class Post(models.Model):
     Таблица записи
     """
 
+    DoesNotExist = None
+
     class Status(models.TextChoices):
         """
         Статус пост, черновик или опубликован
