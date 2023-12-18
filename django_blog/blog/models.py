@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -32,7 +33,7 @@ class Post(models.Model):
     #Атрибуты модели
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
     title = models.CharField(max_length=250)
-    slug = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250, unique_for_date="publish_date")
     body = models.TextField()
     publish_date = models.DateTimeField(default=timezone.now)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -63,3 +64,6 @@ class Post(models.Model):
         :return:
         """
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("blog:post_detail", args=[self.id])
