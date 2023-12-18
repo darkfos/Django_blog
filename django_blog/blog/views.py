@@ -9,8 +9,8 @@ def post_list(request):
     :param request:
     :return:
     """
-    all_posts = Post.published.all()
-    return render(request, "blog/post/list.html", context=all_posts)
+    all_posts = Post.objects.all()
+    return render(request, "blog/post/list.html", {"posts": all_posts})
 
 def post_detail(request, post_id: int):
     """
@@ -19,5 +19,5 @@ def post_detail(request, post_id: int):
     :param post_id:
     :return:
     """
-    post = get_object_or_404(Post, id=post_id, status=Post.status.PUBLISHED)
-    return render(request, "blog/post/detail.html", context=post)
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, "blog/post/detail.html", {"post": post})
