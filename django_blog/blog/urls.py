@@ -5,6 +5,6 @@ app_name = "blog"
 
 #Представления поста
 urlpatterns = [
-    path("", views.post_list(), name='post_list'),
+    path("", views.post_list, name='post_list'),
     path("<int:post_id>", views.post_detail, name="post_detail")
 ]
