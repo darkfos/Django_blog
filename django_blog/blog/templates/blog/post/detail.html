@@ -7,6 +7,6 @@
 {% block content %}
     <h1>Title: {{ post.title }}</h1>
     <p>Text: {{ post.body }}</p>
-    <p>Date: {{ post.publish_date }}</p>
+    <p>Date: {{ post.publish_date.year }}</p>
     <p>Author: {{ post.user_id }}</p>
 {% endblock %}
